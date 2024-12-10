@@ -8,8 +8,6 @@ const columns = [
   { field: 'biografia', headerName: 'Biografia', width: 300},
 ];
 
-const paginationModel = { page: 0, pageSize: 5 };
-
 export default function Autores() {
   const [rows, setRows] = useState([]); // Estado para armazenar os dados
 
@@ -40,9 +38,8 @@ export default function Autores() {
   return (
     <Paper sx={{ height: 400, width: '100%' }}>
       <DataGrid
-        rows={rows}
+        rows={rows} // Usa os dados do estado
         columns={columns}
-        initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}
         checkboxSelection
         sx={{ border: 0 }}
