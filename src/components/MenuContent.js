@@ -6,12 +6,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import BookIcon from '@mui/icons-material/Book';
-import PersonIcon from '@mui/icons-material/Person';
-
 
 const mainListItems = [
-  { text: 'Livros', icon: <BookIcon /> },
-  { text: 'Autores', icon: <PersonIcon /> },
+  { text: 'Livraria', icon: <BookIcon /> },
 ];
 
 export default function MenuContent() {

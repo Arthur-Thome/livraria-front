@@ -12,8 +12,7 @@ import CardContent from '@mui/material/CardContent';
 export default function Autores() {
   const [rows, setRows] = useState([]); // Dados dos autores
   const [formData, setFormData] = useState({ nome: '', biografia: '' }); // Dados do formulário
-  const [deleteId, setDeleteId] = useState(''); // ID para deletar
-  const [updateData, setUpdateData] = useState({ id: '', nome: '', biografia: '' }); // Dados para atualização
+  const [setUpdateData] = useState({ id: '', nome: '', biografia: '' }); // Dados para atualização
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -48,11 +47,6 @@ export default function Autores() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleUpdateChange = (e) => {
-    const { name, value } = e.target;
-    setUpdateData((prev) => ({ ...prev, [name]: value }));
-  };
-
   // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,75 +73,7 @@ export default function Autores() {
     }
   };
 
-  // Nova lógica para deletar
-  const handleDelete = async () => {
-    const id = parseInt(deleteId, 10);
-    if (isNaN(id)) {
-      console.error('ID inválido. Por favor, insira um número válido.');
-      return;
-    }
 
-    const url = `http://localhost:1337/api/autors/${id}`;
-    try {
-      const response = await fetch(url, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      if (response.ok) {
-        setRows((prev) => prev.filter((row) => row.id !== id));
-        console.log(`Autor com ID ${id} excluído com sucesso.`);
-        setDeleteId('');
-      } else {
-        const errorData = await response.json();
-        console.error('Erro da API:', errorData);
-      }
-    } catch (error) {
-      console.error('Erro ao tentar excluir o autor:', error.message);
-    }
-  };
-
-  // Lógica para atualizar
-  const handleUpdate = async () => {
-    const id = parseInt(updateData.id, 10);
-    if (isNaN(id) || !updateData.nome || !updateData.biografia) {
-      console.error('Dados inválidos. Por favor, preencha todos os campos corretamente.');
-      return;
-    }
-
-    const url = `http://localhost:1337/api/autors/${id}`;
-    try {
-      // Verificar se o autor existe
-      const checkResponse = await fetch(url, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      if (!checkResponse.ok) {
-        console.error(`Autor com ID ${id} não encontrado.`);
-        return;
-      }
-
-      // Atualizar os dados do autor
-      const response = await fetch(url, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: { nome: updateData.nome, biografia: updateData.biografia } }),
-      });
-
-      if (response.ok) {
-        const updatedRow = { id, nome: updateData.nome, biografia: updateData.biografia };
-        setRows((prev) => prev.map((row) => (row.id === id ? updatedRow : row)));
-        console.log(`Autor com ID ${id} atualizado com sucesso.`);
-        setUpdateData({ id: '', nome: '', biografia: '' });
-      } else {
-        const errorData = await response.json();
-        console.error('Erro da API:', errorData);
-      }
-    } catch (error) {
-      console.error('Erro ao tentar atualizar o autor:', error.message);
-    }
-  };
 
   return (
     <Box sx={{ p: 2 }}>
@@ -188,72 +114,10 @@ export default function Autores() {
         </CardContent>
       </Card>
 
-      <Card elevation={3} sx={{ mb: 4, p: 2 }}>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Deletar Autor
-          </Typography>
-          <Stack direction="row" spacing={2} alignItems="center">
-            <TextField
-              label="ID do Autor"
-              variant="outlined"
-              value={deleteId}
-              onChange={(e) => setDeleteId(e.target.value)}
-            />
-            <Button
-              variant="contained"
-              color="error"
-              onClick={handleDelete}
-            >
-              Deletar
-            </Button>
-          </Stack>
-        </CardContent>
-      </Card>
-
-      <Card elevation={3} sx={{ mb: 4, p: 2 }}>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Atualizar Autor
-          </Typography>
-          <Stack spacing={2}>
-            <TextField
-              label="ID do Autor"
-              variant="outlined"
-              name="id"
-              value={updateData.id}
-              onChange={handleUpdateChange}
-            />
-            <TextField
-              label="Nome"
-              variant="outlined"
-              name="nome"
-              value={updateData.nome}
-              onChange={handleUpdateChange}
-            />
-            <TextField
-              label="Biografia"
-              variant="outlined"
-              name="biografia"
-              value={updateData.biografia}
-              onChange={handleUpdateChange}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleUpdate}
-            >
-              Atualizar
-            </Button>
-          </Stack>
-        </CardContent>
-      </Card>
-
       <Paper sx={{ height: 400, width: '100%' }}>
         <DataGrid
           rows={rows}
           columns={columns}
-          pageSizeOptions={[5, 10]}
           checkboxSelection
           sx={{ border: 0 }}
         />
