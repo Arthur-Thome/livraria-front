@@ -12,7 +12,6 @@ import CardContent from '@mui/material/CardContent';
 export default function Autores() {
   const [rows, setRows] = useState([]); // Dados dos autores
   const [formData, setFormData] = useState({ nome: '', biografia: '' }); // Dados do formulário
-  const [setUpdateData] = useState({ id: '', nome: '', biografia: '' }); // Dados para atualização
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -77,51 +76,54 @@ export default function Autores() {
 
   return (
     <Box sx={{ p: 2 }}>
-      <Card elevation={3} sx={{ mb: 4, p: 2 }}>
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
-            Adicionar Novo Autor
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit}>
-            <Stack spacing={2}>
-              <TextField
-                label="Nome"
-                variant="outlined"
-                fullWidth
-                name="nome"
-                value={formData.nome}
-                onChange={handleChange}
-              />
-              <TextField
-                label="Biografia"
-                variant="outlined"
-                fullWidth
-                rows={4}
-                name="biografia"
-                value={formData.biografia}
-                onChange={handleChange}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                sx={{ alignSelf: 'flex-end', width: '150px' }}
-              >
-                Enviar
-              </Button>
-            </Stack>
-          </Box>
-        </CardContent>
-      </Card>
-
-      <Paper sx={{ height: 400, width: '100%' }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          checkboxSelection
-          sx={{ border: 0 }}
-        />
-      </Paper>
+      <div class="autorsForm">
+        <Card elevation={3} sx={{ mb: 4, p: 2 }}>
+          <CardContent>
+            <Typography variant="h6" gutterBottom>
+              Adicionar Novo Autor
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit}>
+              <Stack spacing={2}>
+                <TextField
+                  label="Nome"
+                  variant="outlined"
+                  fullWidth
+                  name="nome"
+                  value={formData.nome}
+                  onChange={handleChange}
+                />
+                <TextField
+                  label="Biografia"
+                  variant="outlined"
+                  fullWidth
+                  rows={4}
+                  name="biografia"
+                  value={formData.biografia}
+                  onChange={handleChange}
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  sx={{ alignSelf: 'flex-end', width: '150px' }}
+                >
+                  Enviar
+                </Button>
+              </Stack>
+            </Box>
+          </CardContent>
+        </Card>
+      </div>
+      <div class="autorsTable">
+        <Paper sx={{ height: 400, width: '100%' }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            checkboxSelection
+            sx={{ border: 0 }}
+          />
+        </Paper>
+      </div>
     </Box>
   );
 }

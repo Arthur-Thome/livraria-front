@@ -1,0 +1,112 @@
+body{
+    background-color: gray;
+}
+
+/* Menu */
+.menu {
+    display: flex;
+    justify-content: center;
+    background-color: #000; /* Fundo preto */
+    color: #fff; /* Texto branco */
+    text-align: center; 
+    
+}
+
+.menu a {
+    color: #fff; /* Links brancos */
+    text-decoration: none; /* Remover sublinhado */
+    margin-left: 15px; /* Espaçamento entre links */
+    transition: color 0.3s; /* Transição suave para hover */
+}
+
+.menu a:hover {
+    color: #f06225; /* Destaque ao passar o mouse */
+}
+
+/*Pagina Principal*/
+
+.home{
+    color: #fff;
+    text-align: center;
+}
+
+/* Página Home */
+
+
+/* Centralizando e ajustando imagens */
+.image-container {
+    display: flex; /* Usa Flexbox */
+    justify-content: center; /* Centraliza horizontalmente */
+    gap: 20px; /* Espaço entre as imagens */
+    margin: 20px 0;
+}
+
+.book-image {
+    width: 150px; /* Ajuste conforme a necessidade */
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Envolvendo imagem com sua descrição */
+.image-wrapper {
+    text-align: center; /* Centraliza o texto abaixo da imagem */
+}
+
+/* Estilizando imagens */
+.book-image {
+    width: 150px; /* Define tamanho da imagem */
+}
+
+.autor-image{
+    width: 150px;
+    height: 150px;
+}
+
+/* Estilizando a descrição */
+.image-description {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* Container que centraliza as imagens */
+.autor-container {
+    display: flex; /* Usa Flexbox */
+    justify-content: center; /* Centraliza horizontalmente */
+    gap: 20px; /* Espaçamento entre as imagens */
+    margin: 20px 0;
+}
+
+
+/* Formulário do Livro */
+
+.bookForm{
+    width: 700px;
+    margin: 0 auto;
+}
+
+.bookForm Button{
+    align-self: flex-end;
+    width: 150px;
+}
+
+.bookTable{
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Formulário do Livro */
+
+.autorsForm{
+    width: 700px;
+    margin: 0 auto;
+}
+
+.autorsForm Button{
+    align-self: flex-end;
+    width: 150px;
+}
+
+.autorsTable{
+    max-width: 700px;
+    margin: 0 auto;
+}
